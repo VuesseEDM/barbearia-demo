@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Barbearia Exemplo | Fade, barba e estilo em Loures</title>
+<meta name="description" content="Barbearia em Loures: cortes, barba e marcação em 3 toques pelo WhatsApp. Veja serviços, preços e horário.">
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💈</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --blue:#2438e8; --yellow:#ffd60a; --ink:#0d0f1a; --paper:#fff8e7; --pink:#ff5d8f; --white:#fff;
+  --head:"Bricolage Grotesque","Arial Black",Impact,sans-serif;
+  --body:"DM Sans",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--body);color:var(--ink);background:var(--paper);line-height:1.5;font-size:1.05rem;padding-bottom:76px;overflow-x:hidden}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 1.25rem}
+h1,h2,h3{font-family:var(--head);line-height:.95;letter-spacing:-.02em}
+h2{font-size:clamp(2.2rem,6vw,3.6rem);font-weight:800;margin-bottom:1.5rem}
+
+/* topo */
+.top{position:sticky;top:0;z-index:20;background:var(--ink);color:var(--white)}
+.top .wrap{display:flex;justify-content:space-between;align-items:center;padding-top:.7rem;padding-bottom:.7rem}
+.brand{font-family:var(--head);font-weight:800;font-size:1.35rem;text-decoration:none;display:flex;align-items:center;gap:.5rem}
+.brand i{font-style:normal;display:inline-block;transition:transform .4s}
+.brand:hover i{transform:rotate(360deg)}
+.top nav{display:flex;gap:1.25rem;align-items:center;font-weight:500}
+.top nav a{text-decoration:none}
+.top nav a:hover{color:var(--yellow)}
+.pill{background:var(--yellow);color:var(--ink)!important;padding:.45rem 1rem;border-radius:99px;font-weight:700}
+
+/* hero */
+.hero{background:var(--blue);color:var(--white);padding:3.5rem 0 4.5rem;position:relative;overflow:hidden}
+.hero .wrap{position:relative}
+.hero h1{font-size:clamp(3.6rem,15vw,9.5rem);font-weight:800;text-transform:uppercase}
+.hero h1 span{display:block}
+.hero .hl{display:inline-block;background:var(--yellow);color:var(--ink);padding:0 .12em;transform:rotate(-2deg);margin:.05em 0}
+.hero .out{color:transparent;-webkit-text-stroke:3px var(--white)}
+.hero p.lead{max-width:30ch;font-size:1.2rem;margin:1.5rem 0 1.75rem}
+.btns{display:flex;flex-wrap:wrap;gap:.75rem}
+.btn{display:inline-block;padding:.95rem 1.6rem;border-radius:99px;font-weight:700;text-decoration:none;border:3px solid var(--ink);background:var(--yellow);color:var(--ink);box-shadow:4px 4px 0 var(--ink);transition:transform .15s,box-shadow .15s;cursor:pointer;font:inherit;font-weight:700}
+.btn:hover{transform:translate(-2px,-2px);box-shadow:7px 7px 0 var(--ink)}
+.btn:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--ink)}
+.btn.white{background:var(--white)}
+.btn[disabled]{opacity:.45;cursor:not-allowed;transform:none;box-shadow:4px 4px 0 var(--ink)}
+
+.sticker{position:absolute;right:1.25rem;top:-.5rem;width:150px;height:150px;border-radius:50%;background:var(--pink);color:var(--ink);border:4px solid var(--ink);display:grid;place-content:center;text-align:center;font-family:var(--head);font-weight:800;line-height:1;transform:rotate(12deg);box-shadow:5px 5px 0 var(--ink);animation:wob 4s ease-in-out infinite}
+.sticker b{display:block;font-size:1.7rem}
+.sticker small{font-family:var(--body);font-weight:700;font-size:.8rem;margin-top:.3rem}
+.sticker.open{background:#3ee08f}
+@keyframes wob{50%{transform:rotate(4deg) scale(1.05)}}
+
+.pole{position:absolute;right:4.5rem;bottom:-1rem;width:58px;height:220px;border-radius:29px;border:4px solid var(--ink);background:repeating-linear-gradient(135deg,#e5132f 0 18px,#fff 18px 36px,var(--yellow) 36px 54px,#fff 54px 72px);background-size:100% 102px;animation:spin 2.5s linear infinite}
+@keyframes spin{to{background-position:0 102px}}
+
+/* ticker */
+.ticker{background:var(--yellow);border-block:4px solid var(--ink);overflow:hidden;white-space:nowrap}
+.ticker div{display:inline-flex;animation:run 22s linear infinite}
+.ticker span{font-family:var(--head);font-weight:800;font-size:1.6rem;text-transform:uppercase;padding:.55rem 1.2rem}
+@keyframes run{to{transform:translateX(-50%)}}
+
+section{padding:4rem 0}
+
+/* serviços */
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:1.1rem}
+.card{border:3px solid var(--ink);border-radius:18px;padding:1.2rem;background:var(--white);box-shadow:5px 5px 0 var(--ink);transition:transform .2s;display:flex;flex-direction:column;justify-content:space-between;min-height:210px}
+.card:nth-child(1){background:var(--pink)}
+.card:nth-child(2){background:#7de2ff}
+.card:nth-child(3){background:var(--yellow)}
+.card:nth-child(4){background:#b9f58a}
+.card:hover{transform:rotate(-1.5deg) translateY(-6px)}
+.card h3{font-size:1.8rem;font-weight:800}
+.card p{font-size:.95rem;margin-top:.4rem}
+.card .pr{font-family:var(--head);font-weight:800;font-size:2.6rem}
+
+/* marcação */
+.book{background:var(--ink);color:var(--white)}
+.book h2{color:var(--yellow)}
+.step{margin-bottom:1.75rem}
+.step h3{font-size:1.3rem;margin-bottom:.7rem;font-weight:700;letter-spacing:0}
+.chips{display:flex;flex-wrap:wrap;gap:.6rem}
+.chip{border:2px solid var(--white);background:transparent;color:var(--white);padding:.6rem 1.1rem;border-radius:99px;font:inherit;font-weight:700;cursor:pointer;transition:background .15s,transform .15s}
+.chip:hover:not([disabled]){transform:translateY(-2px)}
+.chip[aria-pressed="true"]{background:var(--yellow);color:var(--ink);border-color:var(--yellow)}
+.chip[disabled]{opacity:.35;cursor:not-allowed;text-decoration:line-through}
+.chip.taken{opacity:.3;cursor:not-allowed;text-decoration:line-through}
+.total{display:flex;align-items:center;gap:1.25rem;flex-wrap:wrap;margin-top:2rem;padding-top:1.5rem;border-top:2px dashed #475;}
+.total strong{font-family:var(--head);font-size:2.6rem;font-weight:800;color:var(--yellow)}
+.total small{color:#c7cbe0;display:block}
+.hint{color:#c7cbe0;font-size:.9rem;margin-top:.5rem}
+
+/* horário */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:3rem}
+table{border-collapse:collapse;width:100%;max-width:400px}
+td{padding:.6rem .2rem;border-bottom:2px solid var(--ink)}
+td:last-child{text-align:right;font-weight:700}
+tr.today td{background:var(--yellow)}
+address{font-style:normal;font-size:1.2rem;margin-bottom:.75rem}
+
+/* avaliações */
+.notes{background:var(--pink);border-block:4px solid var(--ink)}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.note{background:var(--white);border:3px solid var(--ink);padding:1.2rem;box-shadow:5px 5px 0 var(--ink);font-weight:500}
+.note:nth-child(1){transform:rotate(-2deg)}
+.note:nth-child(2){transform:rotate(1.5deg)}
+.note:nth-child(3){transform:rotate(-1deg)}
+.note small{display:block;margin-top:.6rem;opacity:.7}
+.stars{color:#e5132f;letter-spacing:.1em}
+
+footer.end{background:var(--ink);color:#c7cbe0;padding:2rem 0;font-size:.95rem}
+footer.end a{color:var(--yellow)}
+
+.bar{position:fixed;left:0;right:0;bottom:0;display:flex;gap:.6rem;padding:.7rem 1rem calc(.7rem + env(safe-area-inset-bottom,0px));background:var(--ink);z-index:30}
+.bar a{flex:1;text-align:center;padding:.8rem;border-radius:99px;font-weight:700;text-decoration:none;background:var(--white);color:var(--ink)}
+.bar a.wa{background:#3ee08f}
+
+@media (max-width:860px){
+  .cards{grid-template-columns:1fr 1fr}
+  .two,.grid3{grid-template-columns:1fr;gap:2rem}
+  .top nav a:not(.pill){display:none}
+  .sticker{position:static;margin-bottom:1.5rem}
+  .pole{display:none}
+}
+@media (max-width:480px){.cards{grid-template-columns:1fr}}
+@media (min-width:861px){.bar{display:none} body{padding-bottom:0}}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#"><i>💈</i> Barbearia Exemplo</a>
+    <nav aria-label="Principal">
+      <a href="#servicos">Serviços</a>
+      <a href="#horario">Horário</a>
+      <a class="pill" href="#marcar">Marcar</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero" style="padding-top:3.5rem" aria-labelledby="titulo">
+    <div class="wrap">
+      <div class="sticker" id="sticker" aria-live="polite"><div><b id="st-a">…</b><small id="st-b"></small></div></div>
+      <h1 id="titulo"><span>Corta.</span><span class="hl">Fade.</span><span class="out">Repete.</span></h1>
+      <p class="lead">A barbearia do bairro, em Loures. Escolhe o serviço, escolhe a hora e marca em 3 toques.</p>
+      <div class="btns">
+        <a class="btn" href="#marcar">Marcar agora</a>
+        <a class="btn white" href="tel:+351900000000">Ligar</a>
+      </div>
+      <div class="pole" role="img" aria-label="Poste de barbeiro"></div>
+    </div>
+  </section>
+
+  <div class="ticker" aria-hidden="true">
+    <div>
+      <span>Fade ✂</span><span>Taper ✂</span><span>Barba ✂</span><span>Navalha ✂</span><span>Kids ✂</span><span>Sem esperas ✂</span>
+      <span>Fade ✂</span><span>Taper ✂</span><span>Barba ✂</span><span>Navalha ✂</span><span>Kids ✂</span><span>Sem esperas ✂</span>
+    </div>
+  </div>
+
+  <section id="servicos">
+    <div class="wrap">
+      <h2>O que fazemos</h2>
+      <div class="cards">
+        <div class="card"><div><h3>Corte</h3><p>Tesoura ou máquina, lavagem incluída.</p></div><div class="pr">12€</div></div>
+        <div class="card"><div><h3>Barba</h3><p>Toalha quente e navalha.</p></div><div class="pr">8€</div></div>
+        <div class="card"><div><h3>Corte + Barba</h3><p>O mais pedido. Poupas 2€.</p></div><div class="pr">18€</div></div>
+        <div class="card"><div><h3>Infantil</h3><p>Até aos 12 anos.</p></div><div class="pr">9€</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="marcar" class="book" aria-labelledby="mt">
+    <div class="wrap">
+      <h2 id="mt">Marca em 3 toques</h2>
+
+      <div class="step">
+        <h3>1. O que queres?</h3>
+        <div class="chips" id="servs"></div>
+      </div>
+      <div class="step">
+        <h3>2. Que dia?</h3>
+        <div class="chips" id="dias"></div>
+      </div>
+      <div class="step">
+        <h3>3. A que horas?</h3>
+        <div class="chips" id="horas"><span class="hint">Escolhe primeiro o dia.</span></div>
+      </div>
+
+      <div class="total">
+        <div><small>Total</small><strong id="total">0€</strong></div>
+        <a class="btn" id="enviar" href="#" aria-disabled="true">Enviar pelo WhatsApp</a>
+      </div>
+      <p class="hint">Abre o WhatsApp com a mensagem pronta. Horas ocupadas são fictícias nesta demonstração.</p>
+    </div>
+  </section>
+
+  <section id="horario">
+    <div class="wrap two">
+      <div>
+        <h2>Horário</h2>
+        <table aria-label="Horário de funcionamento">
+          <tr data-d="1"><td>Segunda</td><td>Fechado</td></tr>
+          <tr data-d="2"><td>Terça</td><td>9h – 19h</td></tr>
+          <tr data-d="3"><td>Quarta</td><td>9h – 19h</td></tr>
+          <tr data-d="4"><td>Quinta</td><td>9h – 19h</td></tr>
+          <tr data-d="5"><td>Sexta</td><td>9h – 19h</td></tr>
+          <tr data-d="6"><td>Sábado</td><td>9h – 17h</td></tr>
+          <tr data-d="0"><td>Domingo</td><td>Fechado</td></tr>
+        </table>
+      </div>
+      <div>
+        <h2>Onde estamos</h2>
+        <address>Rua Exemplo, 10<br>2670-000 Loures</address>
+        <p style="margin-bottom:1.25rem">Telefone: <a href="tel:+351900000000"><b>900 000 000</b></a></p>
+        <a class="btn white" href="https://www.google.com/maps/search/?api=1&query=Loures">Abrir no Google Maps</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="notes" aria-labelledby="av">
+    <div class="wrap">
+      <h2 id="av">Quem vem, volta</h2>
+      <div class="grid3">
+        <div class="note"><span class="stars" aria-label="5 estrelas">★★★★★</span><p>Corte certo à primeira e ambiente top.</p><small>Cliente, texto de exemplo</small></div>
+        <div class="note"><span class="stars" aria-label="5 estrelas">★★★★★</span><p>Marquei pelo WhatsApp e não esperei nada.</p><small>Cliente, texto de exemplo</small></div>
+        <div class="note"><span class="stars" aria-label="5 estrelas">★★★★★</span><p>A barba ficou impecável. Já tenho hora marcada.</p><small>Cliente, texto de exemplo</small></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="end">
+  <div class="wrap">
+    <p><b>Site de demonstração.</b> Negócio, preços e avaliações são fictícios. Criado por Vincenzo Sorrentino, programador em Loures. Quer um site assim, com marcação pelo WhatsApp, para o seu negócio? <a href="https://wa.me/351900000000?text=Ol%C3%A1%2C%20vi%20o%20site%20de%20exemplo%20da%20barbearia">Fale comigo no WhatsApp</a> ou veja <a href="https://github.com/VuesseEDM">o meu GitHub</a>.</p>
+  </div>
+</footer>
+
+<nav class="bar" aria-label="Contacto rápido">
+  <a href="tel:+351900000000">Ligar</a>
+  <a class="wa" href="#marcar">Marcar</a>
+</nav>
+
+<script>
+(function(){
+  var NUM="351900000000"; // <- troque pelo número real (sem +)
+  var HORAS={0:null,1:null,2:[9,19],3:[9,19],4:[9,19],5:[9,19],6:[9,17]};
+  var DIAS=["Dom","Seg","Ter","Qua","Qui","Sex","Sáb"];
+  var SERV=[{n:"Corte",p:12},{n:"Barba",p:8},{n:"Infantil",p:9},{n:"Sobrancelha",p:3}];
+  var agora=new Date(new Date().toLocaleString("en-US",{timeZone:"Europe/Lisbon"}));
+  var d=agora.getDay(), t=agora.getHours()+agora.getMinutes()/60;
+
+  // estado em tempo real
+  var linha=document.querySelector('tr[data-d="'+d+'"]'); if(linha) linha.className="today";
+  var st=document.getElementById("sticker"), a=document.getElementById("st-a"), b=document.getElementById("st-b");
+  if(HORAS[d] && t>=HORAS[d][0] && t<HORAS[d][1]){ st.className="sticker open"; a.textContent="Aberto"; b.textContent="até às "+HORAS[d][1]+"h"; }
+  else { a.textContent="Fechado"; b.textContent="vê a próxima hora"; }
+
+  // marcação
+  var sel={servs:{},dia:null,hora:null};
+  var elS=document.getElementById("servs"), elD=document.getElementById("dias"), elH=document.getElementById("horas");
+  var elT=document.getElementById("total"), elE=document.getElementById("enviar");
+
+  function chip(txt,pressed,fn,dis){
+    var c=document.createElement("button"); c.type="button"; c.className="chip"; c.textContent=txt;
+    c.setAttribute("aria-pressed",pressed?"true":"false"); if(dis) c.disabled=true;
+    c.addEventListener("click",fn); return c;
+  }
+  function renderServs(){
+    elS.innerHTML="";
+    SERV.forEach(function(s){
+      elS.appendChild(chip(s.n+" · "+s.p+"€",!!sel.servs[s.n],function(){ sel.servs[s.n]=!sel.servs[s.n]; renderServs(); update(); }));
+    });
+  }
+  function dias(){
+    var out=[]; for(var i=0;i<7;i++){ var x=new Date(agora); x.setDate(agora.getDate()+i); out.push(x); } return out;
+  }
+  function chave(x){ return x.getFullYear()+"-"+(x.getMonth()+1)+"-"+x.getDate(); }
+  function renderDias(){
+    elD.innerHTML="";
+    dias().forEach(function(x,i){
+      var h=HORAS[x.getDay()];
+      var lbl=(i===0?"Hoje":i===1?"Amanhã":DIAS[x.getDay()])+" "+x.getDate()+"/"+(x.getMonth()+1);
+      var c=chip(lbl,sel.dia&&sel.dia.k===chave(x),function(){ sel.dia={k:chave(x),d:x,lbl:lbl}; sel.hora=null; renderDias(); renderHoras(); update(); },!h);
+      elD.appendChild(c);
+    });
+  }
+  function ocupada(k,s){ // "aleatório" estável, só para a demo
+    var n=0, str=k+s; for(var i=0;i<str.length;i++){ n=(n*31+str.charCodeAt(i))%97; } return n%10<3;
+  }
+  function renderHoras(){
+    elH.innerHTML="";
+    if(!sel.dia){ elH.innerHTML='<span class="hint">Escolhe primeiro o dia.</span>'; return; }
+    var h=HORAS[sel.dia.d.getDay()], hoje=sel.dia.k===chave(agora), n=0;
+    for(var m=h[0]*60;m<h[1]*60;m+=30){
+      var hh=Math.floor(m/60), mm=m%60, s=hh+":"+(mm<10?"0":"")+mm;
+      if(hoje && m/60<=t+0.5) continue;
+      var oc=ocupada(sel.dia.k,s);
+      var c=chip(s,sel.hora===s,(function(s){return function(){ sel.hora=s; renderHoras(); update(); };})(s),oc);
+      if(oc) c.className+=" taken"; elH.appendChild(c); n++;
+    }
+    if(!n) elH.innerHTML='<span class="hint">Sem horas livres hoje. Tenta outro dia.</span>';
+  }
+  function update(){
+    var tot=0, nomes=[];
+    SERV.forEach(function(s){ if(sel.servs[s.n]){ tot+=s.p; nomes.push(s.n); } });
+    if(sel.servs["Corte"]&&sel.servs["Barba"]) tot-=2; // combo
+    elT.textContent=tot+"€";
+    var ok=nomes.length&&sel.dia&&sel.hora;
+    elE.setAttribute("aria-disabled",ok?"false":"true");
+    elE.style.opacity=ok?"1":".45";
+    elE.href=ok?"https://wa.me/"+NUM+"?text="+encodeURIComponent("Olá! Gostava de marcar: "+nomes.join(" + ")+", "+sel.dia.lbl+" às "+sel.hora+". O meu nome é "):"#marcar";
+  }
+  elE.addEventListener("click",function(e){ if(elE.getAttribute("aria-disabled")==="true") e.preventDefault(); });
+  renderServs(); renderDias(); renderHoras(); update();
+})();
+</script>
+</body>
+</html>
